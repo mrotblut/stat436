@@ -1,3 +1,3 @@
 # Homeworks for Stat 436
 
-[Homework 2](/Homework%202/)
+[Homework 2](Homework%202)
