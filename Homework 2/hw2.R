@@ -13,8 +13,7 @@ col <- function(df) {
     scale_color_manual(values = palette)+
     scale_x_continuous(breaks = seq(2010,2022,by=1))+
     ggtitle("Overall Valentines Day Spending by Category")+
-    theme_bw()+
-    theme(legend.position = "bottom")
+    theme_bw()
 }
 
 line <- function(df) {
@@ -24,23 +23,22 @@ line <- function(df) {
     #scale_color_manual(values = palette)+
     scale_x_continuous(breaks = seq(2010,2022,by=1))+
     ggtitle("Valentines Day Spending by Category")+
-    theme_bw()+
-    theme(legend.position = "bottom")
+    theme_bw()
 }
 
 ui <- fluidPage(
   titlePanel("Valentines Day per Person Spending Year Over Year"),
   sliderInput("year", "Year:", min = 2010, max = 2022,value = c(2010,2022),sep=""),
   checkboxGroupInput("category","Categories:",
-      c("Candy",
-        "Flowers",
-        "Jewelry",
-        "Greeting Cards" = "GreetingCards",
-        "Evening Out" = "EveningOut",
-        "Clothing",
-        "Gift Cards" = "GiftCards"),
-      selected = c("Candy","Flowers","Jewelry","GreetingCards","EveningOut","Clothing","GiftCards"),
-      inline = TRUE),
+                     c("Candy",
+                       "Flowers",
+                       "Jewelry",
+                       "Greeting Cards" = "GreetingCards",
+                       "Evening Out" = "EveningOut",
+                       "Clothing",
+                       "Gift Cards" = "GiftCards"),
+                     selected = c("Candy","Flowers","Jewelry","GreetingCards","EveningOut","Clothing","GiftCards"),
+                     inline = TRUE),
   plotOutput("col"),
   plotOutput("line")
 )
@@ -50,9 +48,9 @@ server <- function(input, output) {
     spending %>% 
       mutate(selected = (
         Year >= input$year[1] & 
-        Year <= input$year[2]) &
-        Category %in% input$category
-             ) %>% 
+          Year <= input$year[2]) &
+          Category %in% input$category
+      ) %>% 
       filter(selected == TRUE) %>% 
       select(Year,Category,Value)
   })
